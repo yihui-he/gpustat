@@ -25,7 +25,7 @@ while True:
         s.append(a)
     df = pd.DataFrame(s)
     df['>6'] = (df>=6).sum(axis=1)
-    print df
     print '\n'
+    print df
     time.sleep(5)
         
