@@ -7,7 +7,7 @@ from IPython import embed
 
 res = 'res'
 while True:
-    machines = os.listdir(res)
+    machines = sorted(os.listdir(res))
     s = []
     for machine in machines:
         while True:
