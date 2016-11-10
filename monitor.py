@@ -9,7 +9,14 @@ while True:
     hosts = np.array(hosts[:-1]).astype(int)/ 1000
     
     import pickle
-    with open(hostname, 'wb') as f:
-        pickle.dump(hosts, f)
-
+    for trycnt in range(10):
+        if trycnt >= 7:
+            raise Exception("unable towrite")
+        try:
+            with open(hostname, 'wb') as f:
+                pickle.dump(hosts, f)
+        except:
+            time.sleep(1)
+            continue
+        break
     time.sleep(5)
