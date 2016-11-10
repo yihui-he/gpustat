@@ -6,10 +6,18 @@ import time
 from IPython import embed
 
 res = 'res'
+starttime=0
+removemachines=False
 while True:
+    if time.time()>starttime+3600:
+        starttime=time.time()
+        removemachines = True
     machines = sorted(os.listdir(res))
     s = []
     for machine in machines:
+        if removemachines:
+            os.remove(osp.join(res,machine))
+            continue
         while True:
             try:
                 with open(osp.join(res, machine), 'rb') as f:
@@ -28,4 +36,5 @@ while True:
     print '\n'
     print df
     time.sleep(5)
+    removemachines=False
         
