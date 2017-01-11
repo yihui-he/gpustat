@@ -6,10 +6,18 @@ import time
 from IPython import embed
 
 res = 'res'
+starttime=0
+removemachines=False
 while True:
-    machines = os.listdir(res)
+    if time.time()>starttime+3600:
+        starttime=time.time()
+        removemachines = True
+    machines = sorted(os.listdir(res))
     s = []
     for machine in machines:
+        if removemachines:
+            os.remove(osp.join(res,machine))
+            continue
         while True:
             try:
                 with open(osp.join(res, machine), 'rb') as f:
@@ -25,9 +33,9 @@ while True:
         s.append(a)
     df = pd.DataFrame(s)
     df['>6'] = (df>=6).sum(axis=1)
-    print df
     print '\n'
+    print df
     os.system('rm res/*')
     time.sleep(5)
-
+    removemachines=False
         
