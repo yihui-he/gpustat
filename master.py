@@ -27,5 +27,7 @@ while True:
     df['>6'] = (df>=6).sum(axis=1)
     print df
     print '\n'
+    os.system('rm res/*')
     time.sleep(5)
+
         
